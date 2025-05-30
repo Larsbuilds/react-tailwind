@@ -1,55 +1,28 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { Moon, Sun, Laptop } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useTheme } from "next-themes"
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import { Moon, Sun } from 'lucide-react';
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return <Button variant="ghost" size="icon" />
-  }
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
+  // Prevent hydration mismatch
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={toggleTheme}>
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun className="mr-2 h-4 w-4" />
-          <span>Light</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon className="mr-2 h-4 w-4" />
-          <span>Dark</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <Laptop className="mr-2 h-4 w-4" />
-          <span>System</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
-} 
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="nav-btn inline-flex items-center justify-center"
+      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+    >
+      {theme === 'dark' ? (
+        <Sun className="w-5 h-5" />
+      ) : (
+        <Moon className="w-5 h-5" />
+      )}
+    </button>
+  );
+}
