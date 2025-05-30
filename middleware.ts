@@ -1,5 +1,5 @@
 import createMiddleware from 'next-intl/middleware';
-import { locales, pathnames, defaultLocale } from './i18n.config';
+import { locales, pathnames, defaultLocale } from './app/config/i18n.config';
 
 export default createMiddleware({
   defaultLocale,
@@ -11,7 +11,6 @@ export default createMiddleware({
 export const config = {
   matcher: [
     '/',
-    '/(de|en)/:path*',
-    '/((?!api|_next|_vercel|.*\\.).*)'
+    '/(de|en)/:path*'
   ]
 };

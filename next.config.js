@@ -1,3 +1,5 @@
+const withNextIntl = require('next-intl/plugin')('./app/i18n/request.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -9,8 +11,6 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['framer-motion'],
-    // Enable modern optimizations
-    serverActions: true,
     serverComponentsExternalPackages: ['framer-motion'],
   },
   // Reduce development logging
@@ -62,4 +62,4 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
 }
 
-module.exports = nextConfig 
+module.exports = withNextIntl(nextConfig);

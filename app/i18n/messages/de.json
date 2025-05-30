@@ -1,0 +1,33 @@
+{
+  "Navigation": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "product": "Produkt",
+    "contact": "Kontakt"
+  },
+  "Index": {
+    "hero": {
+      "title": "Willkommen auf Ihrer Plattform",
+      "subtitle": "Fordern Sie eine Demo an!"
+    },
+    "features": {
+      "feature1": {
+        "title": "Blitzschnell",
+        "description": "Optimierte Leistung für beste Benutzererfahrung"
+      },
+      "feature2": {
+        "title": "Sicher",
+        "description": "Integrierte Sicherheit auf Unternehmensebene"
+      },
+      "feature3": {
+        "title": "Skalierbar",
+        "description": "Wächst mit Ihren Geschäftsanforderungen"
+      }
+    },
+    "cta": {
+      "title": "Bereit loszulegen?",
+      "description": "Starten Sie noch heute und transformieren Sie Ihr Geschäft",
+      "button": "Kontaktieren Sie uns"
+    }
+  }
+}

@@ -1,43 +1,37 @@
-import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from '@/components/providers/theme-provider';
-import { locales } from '@/i18n.config';
+import { Header } from '@/components/layout/Header';
+import { locales } from '@/config/i18n.config';
 
-const inter = Inter({ subsets: ['latin'] });
+import { getMessages } from '@/config/i18n.config';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({
+export default async function RootLayout({
   children,
-  params: { locale }
+  params: { locale },
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  let messages;
-  try {
-    messages = (await import(`@/messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
+  const messages = await getMessages(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <ThemeProvider>
+        <div className="relative min-h-screen bg-background font-sans antialiased">
+          <div>
+            <Header />
+            <main className="relative">
+              {children}
+            </main>
+
+          </div>
+        </div>
+      </ThemeProvider>
+    </NextIntlClientProvider>
   );
 }
